@@ -8,6 +8,13 @@ function App() {
     e.preventDefault();
     let amount = parseInt(count);
 
+    if (count <= 0) {
+      amount = 0;
+    }
+    if (count > 9) {
+      amount = 9;
+    }
+
     setText(data.slice(0, amount));
   };
 
