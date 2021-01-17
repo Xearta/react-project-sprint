@@ -4,7 +4,9 @@ import Alert from './Alert';
 
 function App() {
   const [name, setName] = useState('');
-  const [list, setList] = useState('');
+  const [list, setList] = useState(
+    JSON.parse(localStorage.getItem('list')) || []
+  );
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({
@@ -12,6 +14,13 @@ function App() {
     msg: '',
     type: '',
   });
+
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(list));
+    return () => {
+      // cleanup;
+    };
+  }, [list]);
 
   const handleSubmit = e => {
     e.preventDefault();
